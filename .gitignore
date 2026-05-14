@@ -1,5 +1,4 @@
 .DS_Store
-.gitignore
 node_modules
 public
 prof
@@ -9,3 +8,10 @@ tsconfig.tsbuildinfo
 private/
 .replit
 replit.nix
+
+# Eric Company 안전 가드 (Drive Vault 민감 영역)
+**/tokens.env
+**/status/**
+**/usage/**
+**/tasks/**
+**/memory/**
