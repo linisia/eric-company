@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  THEME_NAME: virgo
+  THEME_NAME: rose-pine
 
 jobs:
   build:
