@@ -53,6 +53,22 @@
   --tertiary:      var(--rp-pine);   // 보조 액센트
   --highlight:     rgba(234, 157, 52, 0.15);
   --textHighlight: rgba(234, 157, 52, 0.35);
+
+  // rose-pine 테마의 link 변수 오버라이드 (love 핑크·gold 안 쓰게)
+  --link-color:           var(--rp-iris);
+  --link-color-hover:     var(--rp-pine);
+  --link-url:             var(--rp-iris);
+  --link-external-color:  var(--rp-pine);
+  --link-external-color-hover: var(--rp-iris);
+  --link-unresolved-color: var(--rp-muted);
+  --link-unresolved-decoration-color: var(--rp-overlay);
+  --text-a:               var(--rp-iris);
+  --text-a-hover:         var(--rp-pine);
+  --h1-color:             var(--rp-text);
+  --h2-color:             var(--rp-text);
+  --h3-color:             var(--rp-text);
+  --love:                 var(--rp-iris);  // rose-pine 핑크 액센트 자체를 iris로 덮음
+  --gold:                 var(--rp-pine);  // rose-pine 골드 액센트 자체를 pine으로 덮음
 }
 
 // ── 다크 모드 (자체) ──
@@ -66,6 +82,20 @@
   --tertiary:      var(--accent-a-dark); // 박사원 골드 = 다크 보조
   --highlight:     rgba(232, 185, 107, 0.15);
   --textHighlight: rgba(232, 185, 107, 0.35);
+
+  // rose-pine 테마 link 변수 다크 모드용 오버라이드
+  --link-color:           var(--accent-d-dark);
+  --link-color-hover:     var(--accent-a-dark);
+  --link-url:             var(--accent-d-dark);
+  --link-external-color:  var(--accent-a-dark);
+  --link-external-color-hover: var(--accent-d-dark);
+  --text-a:               var(--accent-d-dark);
+  --text-a-hover:         var(--accent-a-dark);
+  --h1-color:             var(--ec-dark-text);
+  --h2-color:             var(--ec-dark-text);
+  --h3-color:             var(--ec-dark-text);
+  --love:                 var(--accent-d-dark);
+  --gold:                 var(--accent-a-dark);
 }
 
 // ── 토글 부드럽게 (spec §토글 동작) ──
