@@ -1,0 +1,9 @@
+{
+  "generatedAt": "2026-05-15T14:10:00.000Z",
+  "paths": [
+    "fixtures/password.html"
+  ],
+  "patterns": [
+    "worklogs/**/*.html"
+  ]
+}
