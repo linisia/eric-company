@@ -73,6 +73,20 @@ html, body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+// ── 사이드바 Explorer — 폴더·파일 모두 hover BG (Eric 2026-05-15) ──
+.explorer ul li a,
+.explorer ul li button,
+.explorer .folder-button {
+  border-radius: 4px;
+  padding: 2px 6px;
+  transition: background-color 0.15s ease;
+}
+.explorer ul li a:hover,
+.explorer ul li button:hover,
+.explorer .folder-button:hover {
+  background-color: var(--lightgray);
+}
+
 // ── 카드 hover 모션 (Virgo 단일 BG 위 살짝 떠 보이게) ──
 .popover,
 .recent-posts .recent-post,

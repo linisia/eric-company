@@ -28,27 +28,29 @@ const config: QuartzConfig = {
         code: "IBM Plex Mono",
       },
       colors: {
+        // Rose-Pine Dawn — 외부 일기 톤 (warm cream BG + muted lavender text)
         lightMode: {
-          light: "#faf8f8",
-          lightgray: "#e5e5e5",
-          gray: "#b8b8b8",
-          darkgray: "#4e4e4e",
-          dark: "#2b2b2b",
-          secondary: "#284b63",
-          tertiary: "#84a59d",
-          highlight: "rgba(143, 159, 169, 0.15)",
-          textHighlight: "#fff23688",
+          light: "#faf4ed",        // rp-base
+          lightgray: "#f2e9e1",    // rp-overlay (호버·구분)
+          gray: "#9893a5",         // rp-muted
+          darkgray: "#797593",     // rp-subtle
+          dark: "#575279",         // rp-text
+          secondary: "#907aa9",    // rp-iris (링크)
+          tertiary: "#286983",     // rp-pine (보조)
+          highlight: "rgba(234, 157, 52, 0.15)",
+          textHighlight: "rgba(234, 157, 52, 0.35)",
         },
+        // 자체 다크 — 미드나잇 네이비 + warm cream
         darkMode: {
-          light: "#161618",
-          lightgray: "#393639",
-          gray: "#646464",
-          darkgray: "#d4d4d4",
-          dark: "#ebebec",
-          secondary: "#7b97aa",
-          tertiary: "#84a59d",
-          highlight: "rgba(143, 159, 169, 0.15)",
-          textHighlight: "#b3aa0288",
+          light: "#1a1a2e",        // ec-dark-bg
+          lightgray: "#22223a",    // ec-dark-bg-mute
+          gray: "#787090",         // ec-dark-text-subtle
+          darkgray: "#a8a0b8",     // ec-dark-text-muted
+          dark: "#f0e6d2",         // ec-dark-text (warm cream)
+          secondary: "#c896c0",    // 이과장 플럼 (다크 링크)
+          tertiary: "#e8b96b",     // 박사원 골드 (다크 보조)
+          highlight: "rgba(232, 185, 107, 0.15)",
+          textHighlight: "rgba(232, 185, 107, 0.35)",
         },
       },
     },
