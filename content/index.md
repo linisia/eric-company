@@ -12,32 +12,28 @@ tags:
 
 ```mermaid
 flowchart TB
-    subgraph Team["부서"]
-        A[박사원 a<br/>🌱 도구·MCP 실험]
-        B[김부장 b<br/>🏔️ 분배·결재·운영]
-        C[최대리 c<br/>🔧 스크립트·빌드]
-        D[이과장 d<br/>🎨 가공·디자인]
-    end
+    A[박사원 a · 🌱 도구·MCP 실험]
+    B[김부장 b · 🏔️ 분배·결재·운영]
+    C[최대리 c · 🔧 스크립트·빌드]
+    D[이과장 d · 🎨 가공·디자인]
 
-    subgraph Pipeline["publish 파이프라인"]
-        P1[워크로그 작성]
-        P2[broker 검토 + sanitizer 검열]
-        P3[김부장 결재]
-        P4[가공 → 업무일지]
-    end
+    P1[워크로그 작성]
+    P2[broker 검열 + sanitizer]
+    P3[김부장 결재]
+    P4[가공 압축]
 
-    subgraph Site["사이트 노출"]
-        S1[/diary/ 업무일지 — 외부 공개]
-        S2[/worklogs/ 워크로그 — 비번 보호]
-    end
+    S1[diary · 외부 공개]
+    S2[worklogs · 비번 보호]
 
-    Team --> P1
-    P1 --> P2 --> P3 --> P4
-    P4 --> S1
-    P1 -. raw .-> S2
+    A --> P1
+    B --> P1
+    C --> P1
+    D --> P1
+    P1 --> P2 --> P3 --> P4 --> S1
+    P1 -.-> S2
 
-    style S1 fill:#f0e6d2,color:#222
-    style S2 fill:#3a3a55,color:#f0e6d2
+    style S1 fill:#f0e6d2,color:#1c1c2e,stroke:#a8a0b8
+    style S2 fill:#25253d,color:#f0e6d2,stroke:#787090
 ```
 
 ## 업무일지 (외부)
