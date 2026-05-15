@@ -83,6 +83,29 @@ function ensureN(body, n) {
   return lines.slice(start, endIdx).join("\n").replace(/\n+$/, "");
 }
 
+function extractStorySection(body) {
+  // `## 📖 스토리 (가공본)` 마커 다음 (HTML 주석·빈 줄 skip) ~ 파일 끝(또는 다음 H2) 사이 추출.
+  // story-rewrite.sh가 항상 파일 끝에 append하므로 기본은 EOF까지. 마커 이후 또 다른 같은 마커가
+  // 나오면(이중 append 사고) 첫 블록만 사용.
+  const lines = body.split("\n");
+  const markerRe = /^##\s+📖\s+스토리/;
+  const idx = lines.findIndex(l => markerRe.test(l));
+  if (idx < 0) return null;
+  let i = idx + 1;
+  while (i < lines.length) {
+    const t = lines[i].trim();
+    if (t === "" || /^<!--.*-->\s*$/.test(t)) { i++; continue; }
+    break;
+  }
+  const storyStart = i;
+  let storyEnd = lines.length;
+  for (let j = storyStart; j < lines.length; j++) {
+    if (markerRe.test(lines[j])) { storyEnd = j; break; }
+  }
+  const story = lines.slice(storyStart, storyEnd).join("\n").replace(/\n+$/, "").trim();
+  return story.length > 0 ? story : null;
+}
+
 function runSanitizer(filePath) {
   // 입력 파일을 그대로 sanitize. 리포트 stderr, sanitized 본문 stdout.
   if (!fs.existsSync(SANITIZER)) {
@@ -117,14 +140,15 @@ function extractEpisodeTitle(section) {
   return m ? m[2].trim() : "";
 }
 
-function buildEpisodeFile(section, n) {
-  const title = extractEpisodeTitle(section);
-  const date = extractDate(section);
-  const titleRaw = `#${n} ${title}`;
+function buildEpisodeFile(section, n, meta, storyGenerated) {
+  const title = extractEpisodeTitle(section) || (meta?.title || "").replace(/^#\d+\s*/, "");
+  const date = extractDate(section) || meta?.date || null;
+  const titleRaw = `#${n} ${title}`.trim();
   const fm = [
     "---",
     `title: "${escapeYaml(titleRaw)}"`,
     date ? `date: ${date}` : null,
+    storyGenerated ? "story_generated: true" : null,
     "tags:",
     "  - worklog",
     "---",
@@ -241,19 +265,28 @@ function main() {
       continue;
     }
 
-    const section = ensureN(body, n);
-    if (!section) {
-      tally.errors.push(`${f}: ## #${n} 본문 추출 실패`);
-      continue;
+    // T-D-109: 가공본(`## 📖 스토리`) 우선, 없으면 raw `## #N` fallback.
+    let section;
+    let storyGenerated = false;
+    const story = extractStorySection(body);
+    if (story) {
+      section = story;
+      storyGenerated = true;
+    } else {
+      section = ensureN(body, n);
+      if (!section) {
+        tally.errors.push(`${f}: ## #${n} 본문 추출 실패`);
+        continue;
+      }
     }
 
     if (DRY) {
-      console.log(`[dry-run:would-sync] ${f} → ${agent}/${n}.md (${section.length} bytes)`);
+      console.log(`[dry-run:would-sync] ${f} → ${agent}/${n}.md (${section.length} bytes, story=${storyGenerated})`);
     } else {
       fs.mkdirSync(agentDir, { recursive: true });
-      fs.writeFileSync(targetPath, buildEpisodeFile(section, n));
+      fs.writeFileSync(targetPath, buildEpisodeFile(section, n, meta, storyGenerated));
       refreshAgentIndex(agentDir, agent);
-      console.log(`[sync] ${f} → ${agent}/${n}.md`);
+      console.log(`[sync] ${f} → ${agent}/${n}.md (story=${storyGenerated})`);
     }
     tally.synced += 1;
   }

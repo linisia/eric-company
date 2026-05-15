@@ -1,4 +1,103 @@
 @use "./base.scss";
 @use "./themes";
 
-// put your custom CSS here!
+// ============================================================
+// Eric Company custom theme — Rose-Pine Dawn 라이트 + 자체 다크
+// T-D-111-step2 · 이과장(d) · 2026-05-15
+// 베이스: Virgo (themes/_index.scss, 라인 없는 단일 BG)
+// 라이트: Rose-Pine Dawn (warm cream + muted lavender text)
+// 다크: 자체 결정안 (미드나잇 네이비 + warm cream)
+// 부원 액센트: content_meta/identity/{a,b,c,d}.json
+// ============================================================
+
+:root {
+  // ── Rose-Pine Dawn (라이트) 토큰 ──
+  --rp-base:    #faf4ed;
+  --rp-surface: #fffaf3;
+  --rp-overlay: #f2e9e1;
+  --rp-muted:   #9893a5;
+  --rp-subtle:  #797593;
+  --rp-text:    #575279;
+  --rp-love:    #b4637a;
+  --rp-gold:    #ea9d34;
+  --rp-rose:    #d7827e;
+  --rp-pine:    #286983;
+  --rp-foam:    #56949f;
+  --rp-iris:    #907aa9;
+
+  // ── 자체 다크 토큰 (_dark-mode-spec.md 그대로) ──
+  --ec-dark-bg:         #1c1c2e;
+  --ec-dark-bg-elev:    #25253d;
+  --ec-dark-bg-mute:    #22223a;
+  --ec-dark-text:       #f0e6d2;
+  --ec-dark-text-muted: #a8a0b8;
+  --ec-dark-text-subtle:#787090;
+  --ec-dark-border:     #353550;
+
+  // ── 부원 액센트 (identity/{x}.json) ──
+  --accent-a-light: #cba052;  --accent-a-dark: #e8b96b; // 박사원 머스타드
+  --accent-b-light: #4a5a8a;  --accent-b-dark: #8a9bd4; // 김부장 인디고
+  --accent-c-light: #b56245;  --accent-c-dark: #e08070; // 최대리 벽돌
+  --accent-d-light: #8a4577;  --accent-d-dark: #c896c0; // 이과장 플럼
+}
+
+// ── 라이트 모드 (Rose-Pine Dawn) — Virgo BG 톤 교체 ──
+:root[saved-theme="light"],
+:root:not([saved-theme="dark"]) {
+  --light:         var(--rp-base);
+  --lightgray:     var(--rp-overlay);
+  --gray:          var(--rp-muted);
+  --darkgray:      var(--rp-subtle);
+  --dark:          var(--rp-text);
+  --secondary:     var(--rp-iris);   // 링크·강조
+  --tertiary:      var(--rp-pine);   // 보조 액센트
+  --highlight:     rgba(234, 157, 52, 0.15);
+  --textHighlight: rgba(234, 157, 52, 0.35);
+}
+
+// ── 다크 모드 (자체) ──
+:root[saved-theme="dark"] {
+  --light:         var(--ec-dark-bg);
+  --lightgray:     var(--ec-dark-bg-mute);
+  --gray:          var(--ec-dark-text-subtle);
+  --darkgray:      var(--ec-dark-text-muted);
+  --dark:          var(--ec-dark-text);
+  --secondary:     var(--accent-d-dark); // 이과장 라벤더-플럼 = 다크 기본 링크
+  --tertiary:      var(--accent-a-dark); // 박사원 골드 = 다크 보조
+  --highlight:     rgba(232, 185, 107, 0.15);
+  --textHighlight: rgba(232, 185, 107, 0.35);
+}
+
+// ── 토글 부드럽게 (spec §토글 동작) ──
+html, body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// ── 카드 hover 모션 (Virgo 단일 BG 위 살짝 떠 보이게) ──
+.popover,
+.recent-posts .recent-post,
+.page-listing > li,
+.folder-content > ul > li,
+.tag-content > ul > li {
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+              background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  }
+}
+
+:root[saved-theme="dark"] {
+  .popover,
+  .recent-posts .recent-post,
+  .page-listing > li,
+  .folder-content > ul > li,
+  .tag-content > ul > li {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    &:hover {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+    }
+  }
+}
