@@ -28,29 +28,35 @@ const config: QuartzConfig = {
         code: "IBM Plex Mono",
       },
       colors: {
-        // Rose-Pine Dawn — 외부 일기 톤 (warm cream BG + muted lavender text)
+        // 라이트 모드 — Rose-Pine Dawn 배경 + Eric 정한 컬러 시스템
+        // Primary 1: #4A6CFA 로얄 블루 (메인 브랜드·링크)
+        // Primary 2: #FF6B6B 소프트 코랄 (강조·CTA)
+        // Secondary: #20C997 민트 (보조·태그)
         lightMode: {
-          light: "#faf4ed",        // rp-base
+          light: "#faf4ed",        // rp-base (warm cream BG)
           lightgray: "#f2e9e1",    // rp-overlay (호버·구분)
-          gray: "#9893a5",         // rp-muted
-          darkgray: "#797593",     // rp-subtle
-          dark: "#575279",         // rp-text
-          secondary: "#907aa9",    // rp-iris (링크)
-          tertiary: "#286983",     // rp-pine (보조)
-          highlight: "rgba(234, 157, 52, 0.15)",
-          textHighlight: "rgba(234, 157, 52, 0.35)",
+          gray: "#797593",         // rp-subtle (was muted — 가독성 ↑)
+          darkgray: "#575279",     // rp-text (사이드바 본문과 같게)
+          dark: "#575279",         // rp-text (본문)
+          secondary: "#4A6CFA",    // Primary 1 로얄 블루 (링크)
+          tertiary: "#20C997",     // Secondary 민트 (보조)
+          highlight: "rgba(255, 107, 107, 0.15)",  // 코랄 base
+          textHighlight: "rgba(255, 107, 107, 0.35)",
         },
-        // 자체 다크 — 미드나잇 네이비 + warm cream
+        // 다크 모드 — 미드나잇 + Eric 정한 컬러 시스템
+        // Primary 1: #7950F2 비비드 퍼플 (메인 브랜드·링크)
+        // Primary 2: #F59F00 웜 앰버 (강조·CTA)
+        // Secondary: #339AF0 스카이 블루 (보조·태그)
         darkMode: {
           light: "#1a1a2e",        // ec-dark-bg
           lightgray: "#22223a",    // ec-dark-bg-mute
-          gray: "#787090",         // ec-dark-text-subtle
-          darkgray: "#a8a0b8",     // ec-dark-text-muted
-          dark: "#f0e6d2",         // ec-dark-text (warm cream)
-          secondary: "#c896c0",    // 이과장 플럼 (다크 링크)
-          tertiary: "#e8b96b",     // 박사원 골드 (다크 보조)
-          highlight: "rgba(232, 185, 107, 0.15)",
-          textHighlight: "rgba(232, 185, 107, 0.35)",
+          gray: "#a8a0b8",         // 사이드바 흐림 방지 — 더 밝게
+          darkgray: "#f0e6d2",     // 사이드바 본문과 같게 (was a8a0b8)
+          dark: "#f5efe0",         // 본문 — 가독성 ↑ (was f0e6d2)
+          secondary: "#7950F2",    // Primary 1 비비드 퍼플 (다크 링크)
+          tertiary: "#339AF0",     // Secondary 스카이 블루 (보조)
+          highlight: "rgba(245, 159, 0, 0.15)",  // 앰버 base
+          textHighlight: "rgba(245, 159, 0, 0.35)",
         },
       },
     },

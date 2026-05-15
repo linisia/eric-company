@@ -54,27 +54,26 @@
   --highlight:     rgba(234, 157, 52, 0.15);
   --textHighlight: rgba(234, 157, 52, 0.35);
 
-  // rose-pine 테마 link·강조 변수 오버라이드 (love 핑크·gold 안 쓰게)
-  // 라이트 모드용 별도 변수 `--light-*` 직접 박음
-  --light-love:   var(--rp-iris);
-  --light-gold:   var(--rp-pine);
-  --light-rose:   var(--rp-iris);
-  --light-foam:   var(--rp-pine);
-  --light-iris:   var(--rp-iris);
-  --light-pine:   var(--rp-pine);
+  // Eric 결정 컬러 시스템 (라이트 모드):
+  // Primary 1 #4A6CFA 로얄 블루 / Primary 2 #FF6B6B 코랄 / Secondary #20C997 민트
+  --light-love:   #FF6B6B;  // Primary 2 코랄 (강조)
+  --light-gold:   #20C997;  // Secondary 민트 (보조)
+  --light-rose:   #FF6B6B;
+  --light-foam:   #339AF0;
+  --light-iris:   #4A6CFA;  // Primary 1 로얄 블루
+  --light-pine:   #20C997;
 
-  // 사용처 변수도 직접 덮어쓰기 (안전망)
-  --text-accent:          var(--rp-iris);
-  --text-accent-hover:    var(--rp-pine);
-  --tag-color:            var(--rp-iris);
-  --link-url:             var(--rp-iris);
-  --link-color:           var(--rp-iris);
-  --link-color-hover:     var(--rp-pine);
-  --link-external-color:  var(--rp-pine);
-  --link-external-color-hover: var(--rp-iris);
+  --text-accent:          #4A6CFA;
+  --text-accent-hover:    #6C8DFE;
+  --tag-color:            #20C997;
+  --link-url:             #4A6CFA;
+  --link-color:           #4A6CFA;
+  --link-color-hover:     #FF6B6B;
+  --link-external-color:  #4A6CFA;
+  --link-external-color-hover: #6C8DFE;
   --link-unresolved-color: var(--rp-muted);
-  --text-a:               var(--rp-iris);
-  --text-a-hover:         var(--rp-pine);
+  --text-a:               #4A6CFA;
+  --text-a-hover:         #6C8DFE;
   --h1-color:             var(--rp-text);
   --h2-color:             var(--rp-text);
   --h3-color:             var(--rp-text);
@@ -82,8 +81,8 @@
   --h5-color:             var(--rp-text);
   --h6-color:             var(--rp-text);
   --bold-color:           var(--rp-text);
-  --love:                 var(--rp-iris);
-  --gold:                 var(--rp-pine);
+  --love:                 #FF6B6B;
+  --gold:                 #20C997;
 }
 
 // ── 다크 모드 (자체) ──
@@ -98,19 +97,34 @@
   --highlight:     rgba(232, 185, 107, 0.15);
   --textHighlight: rgba(232, 185, 107, 0.35);
 
-  // rose-pine 테마 link 변수 다크 모드용 오버라이드
-  --link-color:           var(--accent-d-dark);
-  --link-color-hover:     var(--accent-a-dark);
-  --link-url:             var(--accent-d-dark);
-  --link-external-color:  var(--accent-a-dark);
-  --link-external-color-hover: var(--accent-d-dark);
-  --text-a:               var(--accent-d-dark);
-  --text-a-hover:         var(--accent-a-dark);
+  // Eric 결정 컬러 시스템 (다크 모드):
+  // Primary 1 #7950F2 비비드 퍼플 / Primary 2 #F59F00 앰버 / Secondary #339AF0 스카이 블루
+  --light-love:   #F59F00;  // Primary 2 앰버 (다크 강조)
+  --light-gold:   #339AF0;  // Secondary 스카이 (보조)
+  --light-rose:   #F59F00;
+  --light-foam:   #339AF0;
+  --light-iris:   #7950F2;  // Primary 1 비비드 퍼플
+  --light-pine:   #20C997;
+
+  --text-accent:          #7950F2;
+  --text-accent-hover:    #9B85F5;
+  --tag-color:            #339AF0;
+  --link-url:             #7950F2;
+  --link-color:           #7950F2;
+  --link-color-hover:     #F59F00;
+  --link-external-color:  #7950F2;
+  --link-external-color-hover: #9B85F5;
+  --text-a:               #7950F2;
+  --text-a-hover:         #9B85F5;
   --h1-color:             var(--ec-dark-text);
   --h2-color:             var(--ec-dark-text);
   --h3-color:             var(--ec-dark-text);
-  --love:                 var(--accent-d-dark);
-  --gold:                 var(--accent-a-dark);
+  --h4-color:             var(--ec-dark-text);
+  --h5-color:             var(--ec-dark-text);
+  --h6-color:             var(--ec-dark-text);
+  --bold-color:           var(--ec-dark-text);
+  --love:                 #F59F00;
+  --gold:                 #339AF0;
 }
 
 // ── 토글 부드럽게 (spec §토글 동작) ──
@@ -118,10 +132,13 @@ html, body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-// ── 사이드바 Explorer — 폴더·파일 모두 hover BG (Eric 2026-05-15) ──
+// ── 사이드바 Explorer — 본문 폰트 컬러 + hover BG (Eric 2026-05-15) ──
 .explorer ul li a,
 .explorer ul li button,
-.explorer .folder-button {
+.explorer .folder-button,
+.explorer .folder-outer span,
+.explorer .file-link {
+  color: var(--dark) !important;  // 본문 텍스트 색과 동일 (라이트=darkpurple, 다크=warm cream)
   border-radius: 4px;
   padding: 2px 6px;
   transition: background-color 0.15s ease;
