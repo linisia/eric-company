@@ -41,18 +41,18 @@ const config: QuartzConfig = {
           highlight: "rgba(40, 105, 131, 0.10)",
           textHighlight: "rgba(40, 105, 131, 0.20)",
         },
-        // 다크 — 미드나잇 배경에 차분히. 2색만.
-        // Primary: #9ccfd8 부드러운 청록 / Secondary: #908caa 회보라
+        // 다크 — 미드나잇 배경에 차분히. 2색만. (Eric 2026-05-15: 더 밝게)
+        // Primary: #b8e0e7 밝은 청록 / Secondary: #b8b2cf 밝은 회보라
         darkMode: {
           light: "#1a1a2e",
           lightgray: "#22223a",
-          gray: "#908caa",
+          gray: "#b8b2cf",
           darkgray: "#f0e6d2",
           dark: "#f5efe0",
-          secondary: "#9ccfd8",    // Primary 청록
-          tertiary: "#908caa",     // Secondary 회보라
-          highlight: "rgba(156, 207, 216, 0.10)",
-          textHighlight: "rgba(156, 207, 216, 0.20)",
+          secondary: "#b8e0e7",    // Primary 밝은 청록 (was 9ccfd8)
+          tertiary: "#b8b2cf",     // Secondary 밝은 회보라 (was 908caa)
+          highlight: "rgba(184, 224, 231, 0.12)",
+          textHighlight: "rgba(184, 224, 231, 0.22)",
         },
       },
     },

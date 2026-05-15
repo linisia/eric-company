@@ -96,24 +96,32 @@
   --highlight:     rgba(232, 185, 107, 0.15);
   --textHighlight: rgba(232, 185, 107, 0.35);
 
-  // 다크: Primary #9ccfd8 부드러운 청록 / Secondary #908caa 회보라. 2색만.
-  --light-love:   #9ccfd8;
-  --light-gold:   #908caa;
-  --light-rose:   #9ccfd8;
-  --light-foam:   #9ccfd8;
-  --light-iris:   #9ccfd8;
-  --light-pine:   #9ccfd8;
+  // 다크: Primary #b8e0e7 밝은 청록 / Secondary #b8b2cf 밝은 회보라. 더 밝게 (Eric 2026-05-15).
+  --light-love:   #b8e0e7;
+  --light-gold:   #b8b2cf;
+  --light-rose:   #b8e0e7;
+  --light-foam:   #b8e0e7;
+  --light-iris:   #b8e0e7;
+  --light-pine:   #b8e0e7;
 
-  --text-accent:          #9ccfd8;
-  --text-accent-hover:    #b8e0e7;
-  --tag-color:            #908caa;
-  --link-url:             #9ccfd8;
-  --link-color:           #9ccfd8;
-  --link-color-hover:     #b8e0e7;
-  --link-external-color:  #9ccfd8;
-  --link-external-color-hover: #b8e0e7;
-  --text-a:               #9ccfd8;
-  --text-a-hover:         #b8e0e7;
+  // rose-pine 다크 기본 변수도 우리 색으로 통일 (#31748f 잔재 제거)
+  --pine:         #b8e0e7;
+  --foam:         #b8e0e7;
+  --iris:         #b8b2cf;
+  --rose:         #b8e0e7;
+  --love-dark:    #b8e0e7;
+  --gold-dark:    #b8b2cf;
+
+  --text-accent:          #b8e0e7;
+  --text-accent-hover:    #d4ecf0;
+  --tag-color:            #b8b2cf;
+  --link-url:             #b8e0e7;
+  --link-color:           #b8e0e7;
+  --link-color-hover:     #d4ecf0;
+  --link-external-color:  #b8e0e7;
+  --link-external-color-hover: #d4ecf0;
+  --text-a:               #b8e0e7;
+  --text-a-hover:         #d4ecf0;
   --h1-color:             var(--ec-dark-text);
   --h2-color:             var(--ec-dark-text);
   --h3-color:             var(--ec-dark-text);
@@ -121,8 +129,8 @@
   --h5-color:             var(--ec-dark-text);
   --h6-color:             var(--ec-dark-text);
   --bold-color:           var(--ec-dark-text);
-  --love:                 #9ccfd8;
-  --gold:                 #908caa;
+  --love:                 #b8e0e7;
+  --gold:                 #b8b2cf;
 }
 
 // ── 토글 부드럽게 (spec §토글 동작) ──
