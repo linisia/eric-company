@@ -151,8 +151,45 @@ function main() {
   for (const code of CODES) copyPlain(`soul/${code}.md`, `souls/${code}.md`);
   copyPlain("templates/worklog.md", "meta/worklog-template.md");
 
+  // T-C-102 fixture: 페이지 단위 frontmatter `공개:` 분기 3종 + manifest.
+  // sync-content가 매번 생성 — fixture 재현성 보장.
+  const encryptedPaths = seedFixtures();
+  writeContent(
+    "../encrypted-paths.json",
+    JSON.stringify({ generatedAt: new Date().toISOString(), paths: encryptedPaths }, null, 2) + "\n",
+  );
+
   console.log("[sync-content] done");
   for (const ln of summary) console.log("  " + ln);
+  console.log(`  fixtures/  password:${encryptedPaths.length} (manifest: encrypted-paths.json)`);
+}
+
+function seedFixtures() {
+  const base = (visibility, title, body) =>
+    [
+      "---",
+      `title: ${title}`,
+      `공개: ${visibility}`,
+      "---",
+      "",
+      body,
+      "",
+    ].join("\n");
+
+  writeContent(
+    "fixtures/public.md",
+    base("public", "Fixture · public", "공개 페이지. 누구나 본문 그대로 노출."),
+  );
+  writeContent(
+    "fixtures/password.md",
+    base(
+      "password",
+      "Fixture · password",
+      "비밀번호 페이지. 빌드 후 staticrypt가 본문 영역을 AES 암호화.",
+    ),
+  );
+  // private 은 sync 단계에서 제외 — 빌드 자체에 포함 안 함.
+  return ["fixtures/password.html"];
 }
 
 main();
