@@ -54,21 +54,36 @@
   --highlight:     rgba(234, 157, 52, 0.15);
   --textHighlight: rgba(234, 157, 52, 0.35);
 
-  // rose-pine 테마의 link 변수 오버라이드 (love 핑크·gold 안 쓰게)
+  // rose-pine 테마 link·강조 변수 오버라이드 (love 핑크·gold 안 쓰게)
+  // 라이트 모드용 별도 변수 `--light-*` 직접 박음
+  --light-love:   var(--rp-iris);
+  --light-gold:   var(--rp-pine);
+  --light-rose:   var(--rp-iris);
+  --light-foam:   var(--rp-pine);
+  --light-iris:   var(--rp-iris);
+  --light-pine:   var(--rp-pine);
+
+  // 사용처 변수도 직접 덮어쓰기 (안전망)
+  --text-accent:          var(--rp-iris);
+  --text-accent-hover:    var(--rp-pine);
+  --tag-color:            var(--rp-iris);
+  --link-url:             var(--rp-iris);
   --link-color:           var(--rp-iris);
   --link-color-hover:     var(--rp-pine);
-  --link-url:             var(--rp-iris);
   --link-external-color:  var(--rp-pine);
   --link-external-color-hover: var(--rp-iris);
   --link-unresolved-color: var(--rp-muted);
-  --link-unresolved-decoration-color: var(--rp-overlay);
   --text-a:               var(--rp-iris);
   --text-a-hover:         var(--rp-pine);
   --h1-color:             var(--rp-text);
   --h2-color:             var(--rp-text);
   --h3-color:             var(--rp-text);
-  --love:                 var(--rp-iris);  // rose-pine 핑크 액센트 자체를 iris로 덮음
-  --gold:                 var(--rp-pine);  // rose-pine 골드 액센트 자체를 pine으로 덮음
+  --h4-color:             var(--rp-text);
+  --h5-color:             var(--rp-text);
+  --h6-color:             var(--rp-text);
+  --bold-color:           var(--rp-text);
+  --love:                 var(--rp-iris);
+  --gold:                 var(--rp-pine);
 }
 
 // ── 다크 모드 (자체) ──
