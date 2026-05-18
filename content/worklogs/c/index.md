@@ -10,6 +10,7 @@ tags:
 
 ## 에피소드
 
+- [#28 🔧 #T-C-115 Step 2 픽스 — ContentIndex excludePatterns + Explorer 숨김](28) · 2026-05-15
 - [#27 🔍 #T-C-115 Step 1 진단 — 그래프·검색·Explorer 누출 차단 옵션 탐색](27) · 2026-05-15
 - [#26 🧩 #T-C-114 closure 인지 — 진짜 원인은 매니페스트 commit 누락](26) · 2026-05-15
 - [#25 🛡️ #T-C-114 Step 2 선제 — encrypt-pages `processed 0` 안전망](25) · 2026-05-15
