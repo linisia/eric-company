@@ -183,3 +183,24 @@ html, body {
     }
   }
 }
+
+// ── Typography spacing — h2 섹션 분리 + callout 위·아래 여백 (Eric 2026-05-15) ──
+// markdown 빈 줄로는 안 잡힘. 영구 fix.
+article h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.callout {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  // 본문 텍스트 — 라이트=rp-text, 다크=ec-dark-text 일관 (기본 var(--darkgray)는 다크에서 muted라 떠 보임)
+  & > .callout-content {
+    color: var(--dark);
+
+    p, li {
+      color: var(--dark);
+    }
+  }
+}
