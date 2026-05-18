@@ -87,6 +87,9 @@ const config: QuartzConfig = {
       Plugin.ContentIndex({
         enableSiteMap: true,
         enableRSS: true,
+        // T-C-115: password 게이트된 워크로그 메타데이터(제목·태그·링크) 누출 차단.
+        // 그래프·검색·sitemap·RSS 한 곳에서 동시 제외.
+        excludePatterns: ["worklogs/"],
       }),
       Plugin.Assets(),
       Plugin.Static(),

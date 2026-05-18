@@ -28,6 +28,9 @@ interface Options {
   rssFullHtml: boolean
   rssSlug: string
   includeEmptyFiles: boolean
+  // slug prefix 매칭 — 매칭되는 페이지는 contentIndex/sitemap/RSS 전부 제외.
+  // 그래프·검색이 contentIndex.json 소비하므로 노드·검색 인덱스에서도 자동 사라짐.
+  excludePatterns: string[]
 }
 
 const defaultOptions: Options = {
@@ -37,6 +40,7 @@ const defaultOptions: Options = {
   rssFullHtml: false,
   rssSlug: "index",
   includeEmptyFiles: true,
+  excludePatterns: [],
 }
 
 function generateSiteMap(cfg: GlobalConfiguration, idx: ContentIndexMap): string {
@@ -99,9 +103,13 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
     async *emit(ctx, content) {
       const cfg = ctx.cfg.configuration
       const linkIndex: ContentIndexMap = new Map()
+      const excludePatterns = opts?.excludePatterns ?? []
       for (const [tree, file] of content) {
         const slug = file.data.slug!
         const date = getDate(ctx.cfg.configuration, file.data) ?? new Date()
+        if (excludePatterns.some((p) => slug.startsWith(p))) {
+          continue
+        }
         if (opts?.includeEmptyFiles || (file.data.text && file.data.text !== "")) {
           linkIndex.set(slug, {
             slug,

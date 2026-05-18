@@ -38,7 +38,15 @@ export const defaultContentPageLayout: PageLayout = {
         { Component: Component.ReaderMode() },
       ],
     }),
-    Component.Explorer({ useResolvedTitle: true }),
+    Component.Explorer({
+      useResolvedTitle: true,
+      // T-C-115: 비번 보호 워크로그·운영 fixture·메타는 사이드바·탐색에서 숨김.
+      filterFn: (node) =>
+        node.slugSegment !== "tags" &&
+        node.slugSegment !== "worklogs" &&
+        node.slugSegment !== "fixtures" &&
+        node.slugSegment !== "meta",
+    }),
   ],
   right: [
     Component.Graph(),
@@ -62,7 +70,15 @@ export const defaultListPageLayout: PageLayout = {
         { Component: Component.Darkmode() },
       ],
     }),
-    Component.Explorer({ useResolvedTitle: true }),
+    Component.Explorer({
+      useResolvedTitle: true,
+      // T-C-115: 비번 보호 워크로그·운영 fixture·메타는 사이드바·탐색에서 숨김.
+      filterFn: (node) =>
+        node.slugSegment !== "tags" &&
+        node.slugSegment !== "worklogs" &&
+        node.slugSegment !== "fixtures" &&
+        node.slugSegment !== "meta",
+    }),
   ],
   right: [],
 }
