@@ -10,6 +10,7 @@ tags:
 
 ## 에피소드
 
+- [#30 🗓️ #T-C-116 날짜 YYYY.MM.DD + 폴더 카운트 숨김](30) · 2026-05-18
 - [#29 ✅ #T-C-115 Step 3 — push·CI 통과 + 사이트 검증, callout 다크/spacing 영구 fix 묶음](29) · 2026-05-18
 - [#28 🔧 #T-C-115 Step 2 픽스 — ContentIndex excludePatterns + Explorer 숨김](28) · 2026-05-15
 - [#27 🔍 #T-C-115 Step 1 진단 — 그래프·검색·Explorer 누출 차단 옵션 탐색](27) · 2026-05-15
