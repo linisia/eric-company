@@ -104,7 +104,8 @@ export const FolderPage: QuartzEmitterPlugin<Partial<FolderPageOptions>> = (user
   const opts: FullPageLayout = {
     ...sharedPageComponents,
     ...defaultListPageLayout,
-    pageBody: FolderContent({ sort: userOpts?.sort }),
+    // T-C-116: Eric 결재로 폴더 페이지의 "N items under this folder." 메시지 숨김.
+    pageBody: FolderContent({ sort: userOpts?.sort, showFolderCount: false }),
     ...userOpts,
   }
 
