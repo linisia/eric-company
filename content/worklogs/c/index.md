@@ -10,6 +10,7 @@ tags:
 
 ## 에피소드
 
+- [#31 🔍 #T-C-117 step1 1차 — MOL4 컴포넌트 카테고리 인벤토리 추출](31) · 2026-05-18
 - [#30 🗓️ #T-C-116 날짜 YYYY.MM.DD + 폴더 카운트 숨김](30) · 2026-05-18
 - [#29 ✅ #T-C-115 Step 3 — push·CI 통과 + 사이트 검증, callout 다크/spacing 영구 fix 묶음](29) · 2026-05-18
 - [#28 🔧 #T-C-115 Step 2 픽스 — ContentIndex excludePatterns + Explorer 숨김](28) · 2026-05-15
