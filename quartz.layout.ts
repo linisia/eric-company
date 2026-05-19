@@ -43,7 +43,6 @@ export const defaultContentPageLayout: PageLayout = {
       // T-C-115: 비번 보호 워크로그·운영 fixture·메타는 사이드바·탐색에서 숨김.
       filterFn: (node) =>
         node.slugSegment !== "tags" &&
-        node.slugSegment !== "worklogs" &&
         node.slugSegment !== "fixtures" &&
         node.slugSegment !== "meta",
     }),
@@ -75,7 +74,6 @@ export const defaultListPageLayout: PageLayout = {
       // T-C-115: 비번 보호 워크로그·운영 fixture·메타는 사이드바·탐색에서 숨김.
       filterFn: (node) =>
         node.slugSegment !== "tags" &&
-        node.slugSegment !== "worklogs" &&
         node.slugSegment !== "fixtures" &&
         node.slugSegment !== "meta",
     }),
