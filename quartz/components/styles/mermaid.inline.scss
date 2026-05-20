@@ -35,12 +35,25 @@ pre {
   }
 }
 
-// Override base.scss global `text, ...` selector so mermaid inline color/fill survive
-.mermaid text,
-.mermaid .nodeLabel,
-.mermaid .edgeLabel {
-  color: unset;
-  fill: unset;
+// Override base.scss global `text, ...` selector so mermaid stays readable in both themes.
+// Light pastel node fills + dark slate text everywhere (foreignObject HTML labels included).
+.mermaid {
+  text,
+  .nodeLabel,
+  .edgeLabel,
+  .cluster-label,
+  foreignObject div,
+  foreignObject span,
+  foreignObject p {
+    color: #0f172a !important;
+    fill: #0f172a !important;
+  }
+
+  // Edge label background must not blend with dark page background.
+  .edgeLabel,
+  .edgeLabel rect {
+    background-color: #f8fafc !important;
+  }
 }
 
 #mermaid-container {
