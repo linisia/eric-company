@@ -35,6 +35,14 @@ pre {
   }
 }
 
+// Override base.scss global `text, ...` selector so mermaid inline color/fill survive
+.mermaid text,
+.mermaid .nodeLabel,
+.mermaid .edgeLabel {
+  color: unset;
+  fill: unset;
+}
+
 #mermaid-container {
   position: fixed;
   contain: layout;
