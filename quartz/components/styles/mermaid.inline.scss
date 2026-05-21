@@ -36,7 +36,8 @@ pre {
 }
 
 // Override base.scss global `text, ...` selector so mermaid stays readable in both themes.
-// Light pastel node fills + dark slate text everywhere (foreignObject HTML labels included).
+// 노드 fill은 mermaid.inline.ts의 themeVariables에서 항상 light pastel로 강제.
+// 노드 안 텍스트(foreignObject HTML 라벨 + timeline-node 안 SVG text)는 항상 dark slate.
 .mermaid {
   text,
   .nodeLabel,
@@ -54,6 +55,13 @@ pre {
   .edgeLabel rect {
     background-color: #f8fafc !important;
   }
+}
+
+// 다크모드에서 노드 외부 SVG text(timeline title 등)은 페이지 다크 배경에 묻히지 않도록 light fill.
+// `> svg > text` = SVG 직계 text 요소만(노드 안 text는 g.timeline-node 등 wrapper 안이라 제외).
+:root[saved-theme="dark"] .mermaid > svg > text {
+  fill: #f1f5f9 !important;
+  color: #f1f5f9 !important;
 }
 
 #mermaid-container {

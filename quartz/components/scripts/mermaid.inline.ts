@@ -219,21 +219,60 @@ document.addEventListener("nav", async () => {
       {} as Record<(typeof cssVars)[number], string>,
     )
 
-    const darkMode = document.documentElement.getAttribute("saved-theme") === "dark"
+    // 다크모드에서도 mermaid 가시성 유지 — light fill + dark text 항상 강제.
+    // theme을 항상 "base"로 두고 themeVariables를 hardcode light palette로 깐다.
+    // scss의 `color:#0f172a !important` 글자 강제와 짝을 이룬다.
     mermaid.initialize({
       startOnLoad: false,
       securityLevel: "loose",
-      theme: darkMode ? "dark" : "base",
+      theme: "base",
       themeVariables: {
         fontFamily: computedStyleMap["--codeFont"],
-        primaryColor: computedStyleMap["--light"],
-        primaryTextColor: computedStyleMap["--darkgray"],
-        primaryBorderColor: computedStyleMap["--tertiary"],
-        lineColor: computedStyleMap["--darkgray"],
-        secondaryColor: computedStyleMap["--secondary"],
-        tertiaryColor: computedStyleMap["--tertiary"],
-        clusterBkg: computedStyleMap["--light"],
-        edgeLabelBackground: computedStyleMap["--highlight"],
+        // flowchart 노드
+        primaryColor: "#f8fafc",
+        primaryTextColor: "#0f172a",
+        primaryBorderColor: "#475569",
+        // 엣지·라인
+        lineColor: "#475569",
+        // 보조 색
+        secondaryColor: "#fef3c7",
+        secondaryTextColor: "#0f172a",
+        secondaryBorderColor: "#a16207",
+        tertiaryColor: "#dbeafe",
+        tertiaryTextColor: "#0f172a",
+        tertiaryBorderColor: "#1e40af",
+        // 클러스터·노트
+        clusterBkg: "#f1f5f9",
+        clusterBorder: "#475569",
+        noteBkgColor: "#fef3c7",
+        noteTextColor: "#0f172a",
+        noteBorderColor: "#a16207",
+        // 엣지 라벨 배경 (다크모드 페이지에 묻히지 않게 라이트)
+        edgeLabelBackground: "#f8fafc",
+        // timeline·journey 등 색상 스케일 (모두 라이트 톤 + 다크 텍스트)
+        cScale0: "#dbeafe",
+        cScale1: "#fef3c7",
+        cScale2: "#bbf7d0",
+        cScale3: "#fecaca",
+        cScale4: "#e9d5ff",
+        cScale5: "#fed7aa",
+        cScale6: "#a7f3d0",
+        cScale7: "#fbcfe8",
+        cScaleLabel0: "#0f172a",
+        cScaleLabel1: "#0f172a",
+        cScaleLabel2: "#0f172a",
+        cScaleLabel3: "#0f172a",
+        cScaleLabel4: "#0f172a",
+        cScaleLabel5: "#0f172a",
+        cScaleLabel6: "#0f172a",
+        cScaleLabel7: "#0f172a",
+        // sequence/state diagram 등 actor·label 배경
+        actorBkg: "#f8fafc",
+        actorTextColor: "#0f172a",
+        actorBorder: "#475569",
+        labelBoxBkgColor: "#dbeafe",
+        labelTextColor: "#0f172a",
+        labelBoxBorderColor: "#1e40af",
       },
     })
 
