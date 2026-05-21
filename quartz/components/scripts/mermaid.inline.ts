@@ -222,6 +222,10 @@ document.addEventListener("nav", async () => {
     // 다크모드에서도 mermaid 가시성 유지 — light fill + dark text 항상 강제.
     // theme을 항상 "base"로 두고 themeVariables를 hardcode light palette로 깐다.
     // scss의 `color:#0f172a !important` 글자 강제와 짝을 이룬다.
+    // 단, 엣지·화살표·timeline 선 등 stroke는 페이지 배경 위에 직접 그려지므로
+    // 다크모드일 때 라이트 톤으로 분기 (darkMode 토글 시 themechange가 재실행).
+    const darkMode = document.documentElement.getAttribute("saved-theme") === "dark"
+    const lineStroke = darkMode ? "#cbd5e1" : "#475569"
     mermaid.initialize({
       startOnLoad: false,
       securityLevel: "loose",
@@ -232,8 +236,8 @@ document.addEventListener("nav", async () => {
         primaryColor: "#f8fafc",
         primaryTextColor: "#0f172a",
         primaryBorderColor: "#475569",
-        // 엣지·라인
-        lineColor: "#475569",
+        // 엣지·라인 — 다크모드일 때 라이트 톤 (페이지 배경에 묻히지 않게)
+        lineColor: lineStroke,
         // 보조 색
         secondaryColor: "#fef3c7",
         secondaryTextColor: "#0f172a",

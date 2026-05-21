@@ -59,9 +59,20 @@ pre {
 
 // 다크모드에서 노드 외부 SVG text(timeline title 등)은 페이지 다크 배경에 묻히지 않도록 light fill.
 // `> svg > text` = SVG 직계 text 요소만(노드 안 text는 g.timeline-node 등 wrapper 안이라 제외).
-:root[saved-theme="dark"] .mermaid > svg > text {
-  fill: #f1f5f9 !important;
-  color: #f1f5f9 !important;
+:root[saved-theme="dark"] .mermaid {
+  > svg > text {
+    fill: #f1f5f9 !important;
+    color: #f1f5f9 !important;
+  }
+  // timeline horizontal axis · vertical dashed line — `.lineWrapper line`의 stroke를 라이트로.
+  .lineWrapper line {
+    stroke: #cbd5e1 !important;
+  }
+  // timeline arrow head (path with no class, dark fill) — fill 라이트로.
+  // node-bkg/node-line 등 명시 클래스 path는 그대로 유지.
+  > svg > g > path:not([class]) {
+    fill: #cbd5e1 !important;
+  }
 }
 
 #mermaid-container {
