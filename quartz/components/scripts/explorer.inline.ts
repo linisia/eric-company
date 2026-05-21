@@ -176,7 +176,10 @@ async function setupExplorer(currentSlug: FullSlug) {
       serializedExplorerState.map((entry: FolderState) => [entry.path, entry.collapsed]),
     )
 
-    const data = await fetchData
+    // Explorer는 explorerFetchData 우선. 미정의/누락시 fetchData fallback
+    // (renderPage.tsx가 explorerFetchData를 inline script로 항상 정의함).
+    // @ts-ignore — global inline script 변수
+    const data = await (typeof explorerFetchData !== "undefined" ? explorerFetchData : fetchData)
     const entries = [...Object.entries(data)] as [FullSlug, ContentDetails][]
     const trie = FileTrieNode.fromEntries(entries)
 

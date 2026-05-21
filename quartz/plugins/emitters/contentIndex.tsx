@@ -31,6 +31,11 @@ interface Options {
   // slug prefix 매칭 — 매칭되는 페이지는 contentIndex/sitemap/RSS 전부 제외.
   // 그래프·검색이 contentIndex.json 소비하므로 노드·검색 인덱스에서도 자동 사라짐.
   excludePatterns: string[]
+  // true면 static/explorerIndex.json을 추가로 emit. excludePatterns 무시한
+  // slug+title+filePath만 담은 최소 인덱스 — Explorer 사이드바 트리 전용.
+  // staticrypt로 본문 보호된 페이지(worklogs 등)를 검색·그래프·feed에는 숨기되
+  // explorer에서는 폴더로 노출하고 싶을 때 사용.
+  emitExplorerIndex: boolean
 }
 
 const defaultOptions: Options = {
@@ -41,6 +46,7 @@ const defaultOptions: Options = {
   rssSlug: "index",
   includeEmptyFiles: true,
   excludePatterns: [],
+  emitExplorerIndex: false,
 }
 
 function generateSiteMap(cfg: GlobalConfiguration, idx: ContentIndexMap): string {
@@ -103,14 +109,28 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
     async *emit(ctx, content) {
       const cfg = ctx.cfg.configuration
       const linkIndex: ContentIndexMap = new Map()
+      // Explorer 트리 전용 — slug+title+filePath만 담음 (메타데이터 노출 최소화).
+      // excludePatterns에 매칭되어도 explorer에는 노출 (staticrypt 비번 게이트 전제).
+      const explorerIndex = new Map<FullSlug, { slug: FullSlug; filePath: string; title: string }>()
       const excludePatterns = opts?.excludePatterns ?? []
       for (const [tree, file] of content) {
         const slug = file.data.slug!
         const date = getDate(ctx.cfg.configuration, file.data) ?? new Date()
-        if (excludePatterns.some((p) => slug.startsWith(p))) {
+        const isExcluded = excludePatterns.some((p) => slug.startsWith(p))
+        const hasBody = opts?.includeEmptyFiles || (file.data.text && file.data.text !== "")
+
+        if (opts?.emitExplorerIndex && hasBody) {
+          explorerIndex.set(slug, {
+            slug,
+            filePath: file.data.relativePath!,
+            title: file.data.frontmatter?.title!,
+          })
+        }
+
+        if (isExcluded) {
           continue
         }
-        if (opts?.includeEmptyFiles || (file.data.text && file.data.text !== "")) {
+        if (hasBody) {
           linkIndex.set(slug, {
             slug,
             filePath: file.data.relativePath!,
@@ -163,6 +183,18 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
         slug: fp,
         ext: ".json",
       })
+
+      // explorer 사이드바 전용 인덱스 (slug+title+filePath만).
+      // excludePatterns로 검색·그래프·feed에서 숨긴 페이지도 explorer에는 노출.
+      if (opts?.emitExplorerIndex) {
+        const explorerFp = joinSegments("static", "explorerIndex") as FullSlug
+        yield write({
+          ctx,
+          content: JSON.stringify(Object.fromEntries(explorerIndex)),
+          slug: explorerFp,
+          ext: ".json",
+        })
+      }
     },
     externalResources: (ctx) => {
       if (opts?.enableRSS) {

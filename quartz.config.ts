@@ -90,6 +90,9 @@ const config: QuartzConfig = {
         // T-C-115: password 게이트된 워크로그 메타데이터(제목·태그·링크) 누출 차단.
         // 그래프·검색·sitemap·RSS 한 곳에서 동시 제외.
         excludePatterns: ["worklogs/"],
+        // explorer 사이드바는 별도 인덱스(slug+title+filePath만) 사용해서
+        // 워크로그 폴더 트리 노출. 클릭 시 staticrypt 비번 게이트로 본문 보호.
+        emitExplorerIndex: true,
       }),
       Plugin.Assets(),
       Plugin.Static(),

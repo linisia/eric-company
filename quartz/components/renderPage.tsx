@@ -28,7 +28,11 @@ export function pageResources(
   staticResources: StaticResources,
 ): StaticResources {
   const contentIndexPath = joinSegments(baseDir, "static/contentIndex.json")
-  const contentIndexScript = `const fetchData = fetch("${contentIndexPath}").then(data => data.json())`
+  const explorerIndexPath = joinSegments(baseDir, "static/explorerIndex.json")
+  // explorerFetchData: Explorer 사이드바 전용. emitExplorerIndex가 켜지면 별도 인덱스
+  // (worklogs 등 검색·그래프에서 제외된 페이지도 포함). 파일이 없으면 fetchData fallback.
+  const contentIndexScript = `const fetchData = fetch("${contentIndexPath}").then(data => data.json());
+const explorerFetchData = fetch("${explorerIndexPath}").then(r => r.ok ? r.json() : fetchData).catch(() => fetchData)`
 
   const resources: StaticResources = {
     css: [
